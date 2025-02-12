@@ -5,11 +5,16 @@ import CameraView from "./cameraView/CameraView";
 const Analytics = () => {
   const [selectedView, setSelectedView] = useState("grid"); // 'grid' , 'single'
   return (
-    <div className="flex flex-col lg:flex-row p-4 gap-4">
-      <div className="flex-1">
+    <div className="flex flex-col lg:flex-row gap-2 ">
+      <div
+        className="flex-1  bg-secondary my-1 rounded-xl shadow-2xl shadow-black "
+        style={{
+          minHeight: "90vh",
+        }}
+      >
         <CameraView selectedView={selectedView} />
       </div>
-      <div className="w-full lg:w-1/3 flex flex-col gap-4">
+      <div className="w-full lg:w-1/4 flex flex-col gap-3 bg-secondary my-1 rounded-xl shadow-2xl shadow-black">
         <AnalyticsStatistics
           selectedView={selectedView}
           setSelectedView={setSelectedView}

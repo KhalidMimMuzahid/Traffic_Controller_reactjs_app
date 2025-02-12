@@ -24,10 +24,15 @@ const Main = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-100 border-4">
-      <Sidebar open={open} setOpen={setOpen} />
-      <Outlet />
-      <Footer />
+    <div className="min-h-screen bg-primary  ">
+      <div className=" p-4 gap-4">
+        <Sidebar open={open} setOpen={setOpen} />
+        <div className="min-h-screen">
+          <Outlet />
+        </div>
+
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -10,15 +10,18 @@ const Vehicles = () => {
       roadName: "Mirpur-1",
       directionType: "entry", // "exit"
       violationStatus: {
-        lenViolation: true,
-        speedViolation: true,
+        lenViolation: false,
+        speedViolation: false,
       },
       speed: 56,
-      photo:
-        "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8Y2FyfGVufDB8fDB8fHww",
-      numberPlatePhoto: "",
-      numberPlate:
+      // photo:
+      //   "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8Y2FyfGVufDB8fDB8fHww",
+
+      photo: "https://i.postimg.cc/MG3vqK5V/temp-Image0-NBDw-Y.avif",
+
+      numberPlatePhoto:
         "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
+      licenseNumber: "Dhaka La- 5434",
     },
     {
       _id: "55555hfghty545c",
@@ -32,11 +35,10 @@ const Vehicles = () => {
         speedViolation: true,
       },
       speed: 56,
-      photo:
-        "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8Y2FyfGVufDB8fDB8fHww",
-      numberPlatePhoto: "",
-      numberPlate:
+      photo: "https://i.postimg.cc/JnytnVYg/temp-Image0pznzr.avif",
+      numberPlatePhoto:
         "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
+      licenseNumber: "Dhaka La- 5434",
     },
     {
       _id: "555fg45rr6b4b545c",
@@ -50,11 +52,10 @@ const Vehicles = () => {
         speedViolation: true,
       },
       speed: 56,
-      photo:
-        "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8Y2FyfGVufDB8fDB8fHww",
-      numberPlatePhoto: "",
-      numberPlate:
+      photo: "https://i.postimg.cc/CxNRr4fv/temp-Image3-SQmxs.avif",
+      numberPlatePhoto:
         "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
+      licenseNumber: "Dhaka La- 5434",
     },
     {
       _id: "55g45vrrb545c",
@@ -68,11 +69,10 @@ const Vehicles = () => {
         speedViolation: true,
       },
       speed: 56,
-      photo:
-        "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8Y2FyfGVufDB8fDB8fHww",
-      numberPlatePhoto: "",
-      numberPlate:
+      photo: "https://i.postimg.cc/Df94S0Tc/temp-Image7kg4-P1.avif",
+      numberPlatePhoto:
         "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
+      licenseNumber: "Dhaka La- 5434",
     },
     {
       _id: "55fgb6r564b545c",
@@ -86,11 +86,10 @@ const Vehicles = () => {
         speedViolation: true,
       },
       speed: 56,
-      photo:
-        "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8Y2FyfGVufDB8fDB8fHww",
-      numberPlatePhoto: "",
-      numberPlate:
+      photo: "https://i.postimg.cc/bN1DkPYf/temp-Image9-S5f-FS.avif",
+      numberPlatePhoto:
         "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
+      licenseNumber: "Dhaka La- 5434",
     },
     {
       _id: "55ffdv5dfb4b545c",
@@ -104,16 +103,15 @@ const Vehicles = () => {
         speedViolation: true,
       },
       speed: 56,
-      photo:
-        "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8Y2FyfGVufDB8fDB8fHww",
-      numberPlatePhoto: "",
-      numberPlate:
+      photo: "https://i.postimg.cc/hjHvQyHG/temp-Image-Nsrjlg.avif",
+      numberPlatePhoto:
         "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
+      licenseNumber: "Dhaka La- 5434",
     },
   ];
   return (
     <div className="col-span-2">
-      <div className="grid grid-cols-2 gap-1">
+      <div className="grid grid-cols-2 gap-2">
         {vehicles?.map((vehicle) => (
           <Vehicle key={vehicle?._id} vehicle={vehicle} />
         ))}
@@ -123,3 +121,13 @@ const Vehicles = () => {
 };
 
 export default Vehicles;
+
+{
+  /* <div className="container mx-auto px-4 py-6 border-4 border-white">
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  {vehicles.map((vehicle) => (
+    <Vehicle key={vehicle._id} vehicle={vehicle} />
+  ))}
+</div>
+</div> */
+}

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import {
   Drawer,
-  Button,
   Typography,
   IconButton,
   List,
@@ -18,16 +17,25 @@ const Sidebar = ({ open, setOpen }) => {
     <Fragment>
       {/* Menu Button */}
 
-      <Drawer open={open} onClose={closeDrawer}>
+      <Drawer
+        open={open}
+        onClose={closeDrawer}
+        className=" bg-secondary shadow-neutral shadow-inner "
+      >
         <div className="mb-2 flex items-center justify-between p-4">
           <Typography variant="h5" color="primary">
             {/* AI Policing */}
             <FancyText text={"AI Policing"} />
           </Typography>
-          <IconButton variant="text" color="secondary" onClick={closeDrawer}>
+          <IconButton
+            variant="text"
+            color="accent"
+            className="text-accent"
+            onClick={closeDrawer}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
+              fill=""
               viewBox="0 0 24 24"
               strokeWidth={2}
               stroke="currentColor"
@@ -41,8 +49,8 @@ const Sidebar = ({ open, setOpen }) => {
             </svg>
           </IconButton>
         </div>
-        <List>
-          <ListItem className="hover:bg-secondary text-primary">
+        <List className="gap-2">
+          <ListItem className="bg-accent hover:bg-neutral text-primary">
             <ListItemPrefix>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +67,7 @@ const Sidebar = ({ open, setOpen }) => {
             </ListItemPrefix>
             Dashboard
           </ListItem>
-          <ListItem className="hover:bg-secondary text-primary">
+          <ListItem className="bg-accent hover:bg-neutral text-primary">
             <ListItemPrefix>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +89,7 @@ const Sidebar = ({ open, setOpen }) => {
               Zones
             </Link>
           </ListItem>
-          <ListItem className="hover:bg-secondary text-primary">
+          <ListItem className="bg-accent hover:bg-neutral text-primary">
             <ListItemPrefix>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +111,7 @@ const Sidebar = ({ open, setOpen }) => {
               Analytics
             </Link>
           </ListItem>
-          <ListItem className="hover:bg-secondary text-primary">
+          <ListItem className="bg-accent hover:bg-neutral text-primary">
             <ListItemPrefix>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -121,9 +129,9 @@ const Sidebar = ({ open, setOpen }) => {
             Admin Control
           </ListItem>
         </List>
-        <Button className="mt-3 ml-5 bg-primary text-white" size="sm">
+        {/* <Button className="mt-3 ml-5 bg-primary text-white" size="sm">
           Know more about us
-        </Button>
+        </Button> */}
       </Drawer>
     </Fragment>
   );

@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const colors = [
-  "text-primary",
-  "text-secondary",
+  // "text-primary",
+  // "text-secondary",
   "text-accent",
   "text-neutral",
   //   "text-purple-500",
