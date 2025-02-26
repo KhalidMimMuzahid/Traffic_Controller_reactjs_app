@@ -9,12 +9,19 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
+import { useGetUsersQuery } from "../../../app/services/userApi/userApi";
 
 const Users = () => {
-  const [users, setUsers] = useState([
-    { id: 1, email: "admin@example.com", role: "admin" },
-    { id: 2, email: "super@example.com", role: "super_admin" },
-  ]);
+  const {
+    data,
+    // error: getUserError,
+    // isError,
+    // isLoading,
+    // isSuccess,
+    // refetch,
+  } = useGetUsersQuery();
+  console.log("data\n", data);
+
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [newUser, setNewUser] = useState({
@@ -24,16 +31,10 @@ const Users = () => {
     role: "admin",
   });
 
-  const filteredUsers = users.filter(
-    (user) =>
-      user.email.toLowerCase().includes(search.toLowerCase()) ||
-      user.id.toString().includes(search)
-  );
-
   const handleAddUser = () => {
-    setUsers([...users, { id: users.length + 1, ...newUser }]);
+    // setUsers([...users, { id: users.length + 1, ...newUser }]);
     setIsModalOpen(false);
-    setNewUser({ email: "", phone: "", password: "", role: "admin" });
+    // setNewUser({ email: "", phone: "", password: "", role: "admin" });
   };
 
   return (
@@ -54,15 +55,17 @@ const Users = () => {
           <tr className="bg-secondary text-white">
             <th className="p-3 text-left">ID</th>
             <th className="p-3 text-left">Email</th>
+            <th className="p-3 text-left">Name</th>
             <th className="p-3 text-left">Role</th>
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.map((user) => (
-            <tr key={user.id} className="border-b">
-              <td className="p-3">{user.id}</td>
-              <td className="p-3">{user.email}</td>
-              <td className="p-3">{user.role}</td>
+          {data?.data?.map((user) => (
+            <tr key={user?.id} className="border-b">
+              <td className="p-3">{user?.id}</td>
+              <td className="p-3">{user?.name}</td>
+              <td className="p-3">{user?.email}</td>
+              <td className="p-3">{user?.role}</td>
             </tr>
           ))}
         </tbody>

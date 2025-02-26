@@ -3,7 +3,16 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // Define a service using a base URL and expected endpoints
 export const userApi = createApi({
   reducerPath: "userApi",
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_BASE_URL,
+    prepareHeaders: (headers) => {
+      const accessToken = localStorage.getItem("access_token");
+      if (accessToken) {
+        headers.set("authorization", `Bearer ${accessToken}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: (builder) => ({
     // getUser: builder.query({
     //   query: (name) => `/user/${name}`,
@@ -21,6 +30,12 @@ export const userApi = createApi({
         method: "GET",
       }),
     }),
+    getUsers: builder.query({
+      query: () => ({
+        url: `/users/get-users`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -30,4 +45,5 @@ export const {
   //  useGetUserQuery
   // useLoginMutation,
   useLoginQuery,
+  useGetUsersQuery,
 } = userApi;

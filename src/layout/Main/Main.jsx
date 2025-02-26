@@ -8,7 +8,7 @@ const Main = () => {
 
   useEffect(() => {
     const handleMouseMove = (event) => {
-      console.log({ clientX: event.clientX });
+      // console.log({ clientX: event.clientX });
       if (event.clientX <= 20) {
         // Call the function when the mouse is near the left edge (20px)
         // console.log({ clientX: event.clientX });
