@@ -3,6 +3,7 @@ import { useLoginQuery } from "../../app/services/userApi/userApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../app/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const SignIn = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -13,21 +14,31 @@ const SignIn = () => {
   const {
     data,
     error: loginError,
+    isError,
     isLoading,
     isSuccess,
+    refetch,
   } = useLoginQuery(formData, { skip: !triggerLogin });
 
   useEffect(() => {
     if (isSuccess && data?.is_success) {
       dispatch(setUser(data?.data));
-      navigate("/dashboard");
+      toast.success("logged in successfully");
+      navigate("/analytics");
     }
   }, [isSuccess, data, dispatch, navigate]);
+  useEffect(() => {
+    if (isError && loginError) {
+      // toast.error(loginError?.data?.error?.message);
+      setError(loginError?.data?.error?.message);
+    }
+  }, [isError, loginError]);
   useEffect(() => {
     // navigate("/dashboard");
   }, [user]);
 
   const handleChange = (e) => {
+    setTriggerLogin(false);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -40,6 +51,7 @@ const SignIn = () => {
       return;
     }
     setTriggerLogin(true);
+    refetch();
   };
 
   return (
@@ -51,11 +63,7 @@ const SignIn = () => {
         {error && (
           <p className="text-red-500 text-sm text-center mb-4">{error}</p>
         )}
-        {loginError && (
-          <p className="text-red-500 text-sm text-center mb-4">
-            Login failed. Please check your credentials.
-          </p>
-        )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-neutral mb-1">Email</label>
