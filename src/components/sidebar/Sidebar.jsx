@@ -309,7 +309,7 @@ const Sidebar = ({ open, setOpen }) => {
                   >
                     <List className="ml-6 border border-accent">
                       <ListItem className="bg-tertiary text-primary hover:bg-neutral">
-                        <Link to="/users">Users</Link>
+                        <Link to="/cpanel/users">Users</Link>
                       </ListItem>
                       <ListItem className="bg-tertiary text-primary hover:bg-neutral">
                         <Link to="/zones">Zones</Link>
