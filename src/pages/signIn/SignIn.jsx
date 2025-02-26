@@ -22,7 +22,7 @@ const SignIn = () => {
       dispatch(setUser(data?.data));
       navigate("/dashboard");
     }
-  }, [isSuccess, data, dispatch]);
+  }, [isSuccess, data, dispatch, navigate]);
   useEffect(() => {
     // navigate("/dashboard");
   }, [user]);
