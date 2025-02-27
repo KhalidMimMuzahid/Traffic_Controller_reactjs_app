@@ -17,13 +17,13 @@ export const userApi = createApi({
     // getUser: builder.query({
     //   query: (name) => `/user/${name}`,
     // }),
-    // login: builder.mutation({
-    //   query: (credentials) => ({
-    //     url: "/auth/login",
-    //     method: "POST",
-    //     body: credentials,
-    //   }),
-    // }),
+    addUser: builder.mutation({
+      query: (userData) => ({
+        url: "/users/add-user",
+        method: "POST",
+        body: userData,
+      }),
+    }),
     login: builder.query({
       query: ({ email, password }) => ({
         url: `/users/login?email=${email}&password=${password}`,
@@ -31,8 +31,8 @@ export const userApi = createApi({
       }),
     }),
     getUsers: builder.query({
-      query: () => ({
-        url: `/users/get-users`,
+      query: (page) => ({
+        url: `/users/get-users?page=${page}&limit=10`,
         method: "GET",
       }),
     }),
@@ -46,4 +46,5 @@ export const {
   // useLoginMutation,
   useLoginQuery,
   useGetUsersQuery,
+  useAddUserMutation,
 } = userApi;

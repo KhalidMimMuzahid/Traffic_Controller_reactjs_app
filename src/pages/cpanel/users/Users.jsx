@@ -1,42 +1,27 @@
-import { useState } from "react";
-import {
-  Button,
-  Input,
-  Dialog,
-  DialogBody,
-  DialogHeader,
-  DialogFooter,
-  Select,
-  Option,
-} from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import { Button, Input } from "@material-tailwind/react";
 import { useGetUsersQuery } from "../../../app/services/userApi/userApi";
+import AddUser from "./addUser/AddUser";
 
 const Users = () => {
+  const [metaData, setMetaData] = useState({ current: 1 });
   const {
     data,
     // error: getUserError,
     // isError,
     // isLoading,
-    // isSuccess,
+    isSuccess,
     // refetch,
-  } = useGetUsersQuery();
-  console.log("data\n", data);
+  } = useGetUsersQuery(metaData?.current);
 
   const [search, setSearch] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const [newUser, setNewUser] = useState({
-    email: "",
-    phone: "",
-    password: "",
-    role: "admin",
-  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleAddUser = () => {
-    // setUsers([...users, { id: users.length + 1, ...newUser }]);
-    setIsModalOpen(false);
-    // setNewUser({ email: "", phone: "", password: "", role: "admin" });
-  };
-
+  useEffect(() => {
+    if (isSuccess) {
+      setMetaData(data?.meta_data);
+    }
+  }, [isSuccess, data?.meta_data]);
   return (
     <div className="p-6 bg-neutral min-h-screen">
       <div className="flex gap-2  justify-between items-center mb-4">
@@ -50,72 +35,81 @@ const Users = () => {
           Add New
         </Button>
       </div>
-      <table className="w-full bg-white shadow-md rounded">
-        <thead>
-          <tr className="bg-secondary text-white">
-            <th className="p-3 text-left">ID</th>
-            <th className="p-3 text-left">Email</th>
-            <th className="p-3 text-left">Name</th>
-            <th className="p-3 text-left">Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data?.data?.map((user) => (
-            <tr key={user?.id} className="border-b">
-              <td className="p-3">{user?.id}</td>
-              <td className="p-3">{user?.name}</td>
-              <td className="p-3">{user?.email}</td>
-              <td className="p-3">{user?.role}</td>
+
+      <div className="w-full flex flex-col gap-2">
+        <table className="w-full bg-white shadow-md rounded">
+          <thead>
+            <tr className="bg-secondary text-white">
+              <th className="p-3 text-left">ID</th>
+              <th className="p-3 text-left">Email</th>
+              <th className="p-3 text-left">Name</th>
+              <th className="p-3 text-left">Role</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <Dialog open={isModalOpen} handler={() => setIsModalOpen(false)}>
-        <DialogHeader>Create User</DialogHeader>
-        <DialogBody className="flex flex-col gap-2">
-          <Input
-            label="Email"
-            value={newUser.email}
-            onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-            className="w-full p-2 border mb-3"
-          />
-          <Input
-            label="Phone"
-            value={newUser.phone}
-            onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
-            className="w-full p-2 border mb-3"
-          />
-          <Input
-            type="password"
-            label="Password"
-            value={newUser.password}
-            onChange={(e) =>
-              setNewUser({ ...newUser, password: e.target.value })
-            }
-            className="w-full p-2 border mb-3"
-          />
-          <Select
-            label="Role"
-            value={newUser.role}
-            onChange={(e) => setNewUser({ ...newUser, role: e })}
+          </thead>
+          <tbody>
+            {data?.data?.map((user) => (
+              <tr key={user?.id} className="border-b">
+                <td className="p-3">{user?.id}</td>
+                <td className="p-3">{user?.name}</td>
+                <td className="p-3">{user?.email}</td>
+                <td className="p-3">{user?.role}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {/* Pagination Buttons */}
+        <div className="flex gap-2 justify-end">
+          <button
+            className="p-2 bg-secondary text-white rounded disabled:opacity-50"
+            onClick={() => {
+              setMetaData((prev) => {
+                return { ...prev, current: 1 };
+              });
+            }}
+            disabled={metaData?.current === 1}
           >
-            <Option value="admin">Admin</Option>
-            <Option value="super_admin">Super Admin</Option>
-          </Select>
-        </DialogBody>
-        <DialogFooter>
-          <Button
-            color="gray"
-            onClick={() => setIsModalOpen(false)}
-            className="mr-2"
+            First
+          </button>
+          <button
+            className="p-2 bg-secondary text-white rounded disabled:opacity-50"
+            onClick={() => {
+              setMetaData((prev) => {
+                return { ...prev, current: prev?.current - 1 };
+              });
+            }}
+            disabled={metaData?.current === 1}
           >
-            Cancel
-          </Button>
-          <Button color="blue" onClick={handleAddUser}>
-            Create User
-          </Button>
-        </DialogFooter>
-      </Dialog>
+            Prev
+          </button>
+          <span className="p-2">
+            {metaData?.current} / {metaData?.total}
+          </span>
+          <button
+            className="p-2 bg-secondary text-white rounded disabled:opacity-50"
+            onClick={() => {
+              setMetaData((prev) => {
+                return { ...prev, current: prev?.current + 1 };
+              });
+            }}
+            disabled={metaData?.current === metaData?.total}
+          >
+            Next
+          </button>
+          <button
+            className="p-2 bg-secondary text-white rounded disabled:opacity-50"
+            onClick={() => {
+              setMetaData((prev) => {
+                return { ...prev, current: metaData?.total };
+              });
+            }}
+            disabled={metaData?.current === metaData?.total}
+          >
+            Last
+          </button>
+        </div>
+      </div>
+
+      <AddUser isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </div>
   );
 };
