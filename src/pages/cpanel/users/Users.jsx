@@ -9,7 +9,7 @@ const Users = () => {
     data,
     // error: getUserError,
     // isError,
-    // isLoading,
+    isLoading,
     isSuccess,
     // refetch,
   } = useGetUsersQuery(metaData?.current);
@@ -21,7 +21,7 @@ const Users = () => {
     if (isSuccess) {
       setMetaData(data?.meta_data);
     }
-  }, [isSuccess, data?.meta_data]);
+  }, [isSuccess, data?.meta_data, isLoading]);
   return (
     <div className="p-6 bg-neutral min-h-screen">
       <div className="flex gap-2  justify-between items-center mb-4">
@@ -50,62 +50,67 @@ const Users = () => {
             {data?.data?.map((user) => (
               <tr key={user?.id} className="border-b">
                 <td className="p-3">{user?.id}</td>
-                <td className="p-3">{user?.name}</td>
                 <td className="p-3">{user?.email}</td>
+                <td className="p-3">{user?.name}</td>
                 <td className="p-3">{user?.role}</td>
               </tr>
             ))}
           </tbody>
         </table>
         {/* Pagination Buttons */}
-        <div className="flex gap-2 justify-end">
-          <button
-            className="p-2 bg-secondary text-white rounded disabled:opacity-50"
-            onClick={() => {
-              setMetaData((prev) => {
-                return { ...prev, current: 1 };
-              });
-            }}
-            disabled={metaData?.current === 1}
-          >
-            First
-          </button>
-          <button
-            className="p-2 bg-secondary text-white rounded disabled:opacity-50"
-            onClick={() => {
-              setMetaData((prev) => {
-                return { ...prev, current: prev?.current - 1 };
-              });
-            }}
-            disabled={metaData?.current === 1}
-          >
-            Prev
-          </button>
+        <div className="flex gap-2 justify-between">
+          <div className="flex gap-2">
+            <button
+              className="hover:cursor-pointer p-2 bg-secondary text-white rounded disabled:opacity-50"
+              onClick={() => {
+                setMetaData((prev) => {
+                  return { ...prev, current: 1 };
+                });
+              }}
+              disabled={metaData?.current === 1}
+            >
+              {"<< First"}
+            </button>
+            <button
+              className="hover:cursor-pointer p-2 bg-secondary text-white rounded disabled:opacity-50"
+              onClick={() => {
+                setMetaData((prev) => {
+                  return { ...prev, current: metaData?.prev };
+                });
+              }}
+              disabled={metaData?.current === 1}
+            >
+              {"< Prev"}
+            </button>
+          </div>
+
           <span className="p-2">
             {metaData?.current} / {metaData?.total}
           </span>
-          <button
-            className="p-2 bg-secondary text-white rounded disabled:opacity-50"
-            onClick={() => {
-              setMetaData((prev) => {
-                return { ...prev, current: prev?.current + 1 };
-              });
-            }}
-            disabled={metaData?.current === metaData?.total}
-          >
-            Next
-          </button>
-          <button
-            className="p-2 bg-secondary text-white rounded disabled:opacity-50"
-            onClick={() => {
-              setMetaData((prev) => {
-                return { ...prev, current: metaData?.total };
-              });
-            }}
-            disabled={metaData?.current === metaData?.total}
-          >
-            Last
-          </button>
+          <div className="flex gap-2">
+            <button
+              className="hover:cursor-pointer p-2 bg-secondary text-white rounded disabled:opacity-50"
+              onClick={() => {
+                setMetaData((prev) => {
+                  return { ...prev, current: metaData?.next };
+                });
+              }}
+              disabled={metaData?.current === metaData?.total}
+            >
+              {"Next >"}
+            </button>
+            <button
+              className="hover:cursor-pointer p-2 bg-secondary text-white rounded disabled:opacity-50"
+              onClick={() => {
+                setMetaData((prev) => {
+                  return { ...prev, current: metaData?.total };
+                });
+              }}
+              disabled={metaData?.current === metaData?.total}
+            >
+              {"Last >>"}
+            </button>
+          </div>
         </div>
       </div>
 
