@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLoginQuery } from "../../app/services/userApi/userApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../app/features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 const SignIn = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -11,6 +11,8 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
   const {
     data,
     error: loginError,
@@ -24,7 +26,7 @@ const SignIn = () => {
     if (isSuccess && data?.is_success) {
       dispatch(setUser(data?.data));
       toast.success("logged in successfully");
-      navigate("/analytics");
+      navigate(from, { replace: true });
     }
   }, [isSuccess, data, dispatch, navigate]);
   useEffect(() => {

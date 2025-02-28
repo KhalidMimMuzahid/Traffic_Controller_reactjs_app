@@ -24,6 +24,12 @@ export const userApi = createApi({
         body: userData,
       }),
     }),
+    checkLoggedInStatus: builder.query({
+      query: () => ({
+        url: `/users/check_logged_in_status`,
+        method: "GET",
+      }),
+    }),
     login: builder.query({
       query: ({ email, password }) => ({
         url: `/users/login?email=${email}&password=${password}`,
@@ -45,6 +51,7 @@ export const {
   //  useGetUserQuery
   // useLoginMutation,
   useLoginQuery,
+  useCheckLoggedInStatusQuery,
   useGetUsersQuery,
   useAddUserMutation,
 } = userApi;

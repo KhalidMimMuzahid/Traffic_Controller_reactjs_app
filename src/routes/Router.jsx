@@ -6,6 +6,7 @@ import Analytics from "../pages/analytics/Analytics";
 import SignIn from "../pages/signIn/SignIn";
 import CPanel from "../pages/cpanel/CPanel";
 import Users from "../pages/cpanel/users/Users";
+import PrivetRoute from "./privateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,11 @@ export const router = createBrowserRouter([
       { path: "/analytics", element: <Analytics /> },
       {
         path: "/cpanel",
-        element: <CPanel />,
+        element: (
+          <PrivetRoute>
+            <CPanel />
+          </PrivetRoute>
+        ),
         children: [{ path: "/cpanel/users", element: <Users /> }],
       },
     ],
