@@ -36,7 +36,7 @@ const Entity = () => {
     // isError,
     isLoading: isLoadingForIntersection,
     isSuccess: isSuccessForIntersection,
-    // refetch,
+    refetch: refetchForIntersection,
   } = useGetIntersectionQuery(
     { page: metaDataForIntersection?.current, zoneId: selectedZone },
     {
@@ -64,7 +64,7 @@ const Entity = () => {
     // isError,
     isLoading: isLoadingForRoad,
     isSuccess: isSuccessForRoad,
-    // refetch,
+    refetch: refetchForRoad,
   } = useGetRoadsQuery(
     { page: metaDataForRoad?.current, intersectionId: selectedIntersection },
     {
@@ -119,6 +119,8 @@ const Entity = () => {
             setSelectedIntersection={setSelectedIntersection}
             metaData={metaDataForIntersection}
             setMetaData={setMetaDataForIntersection}
+            selectedZone={selectedZone}
+            refetch={refetchForIntersection}
           />
           <hr className="border-gray-300 opacity-20" />
           {/* Road Selection */}
@@ -127,6 +129,8 @@ const Entity = () => {
             setSelectedRoad={setSelectedRoad}
             metaData={metaDataForRoad}
             setMetaData={setMetaDataForRoad}
+            selectedIntersection={selectedIntersection}
+            refetch={refetchForRoad}
           />
           <hr className="border-gray-300 opacity-20" />
 

@@ -14,6 +14,13 @@ export const roadApi = createApi({
     },
   }),
   endpoints: (builder) => ({
+    addRoad: builder.mutation({
+      query: (roadData) => ({
+        url: "/roads/add-road",
+        method: "POST",
+        body: roadData,
+      }),
+    }),
     getRoads: builder.query({
       query: ({ page, intersectionId }) => ({
         url: `/roads/get-roads?page=${page}&limit=10${
@@ -27,4 +34,4 @@ export const roadApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetRoadsQuery } = roadApi;
+export const { useAddRoadMutation, useGetRoadsQuery } = roadApi;

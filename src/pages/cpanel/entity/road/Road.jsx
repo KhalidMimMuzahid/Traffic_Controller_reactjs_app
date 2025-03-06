@@ -1,8 +1,19 @@
 /* eslint-disable react/prop-types */
 
+import { useState } from "react";
 import Paginate from "../../../../components/paginate/Paginate";
+import AddRoad from "./addRoad/AddRoad";
+import { toast } from "react-toastify";
 
-const Road = ({ roads, setSelectedRoad, metaData, setMetaData }) => {
+const Road = ({
+  roads,
+  setSelectedRoad,
+  metaData,
+  setMetaData,
+  selectedIntersection,
+  refetch,
+}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div>
       <div className="grid grid-cols-12 gap-4 items-center">
@@ -25,7 +36,13 @@ const Road = ({ roads, setSelectedRoad, metaData, setMetaData }) => {
         </div>
         <div className="col-span-1">
           <button
-            // onClick={() => setAddBrandModal(!addBrandModal)}
+            onClick={() => {
+              if (!selectedIntersection) {
+                toast.error("please select a intersection first");
+              } else {
+                setIsModalOpen(true);
+              }
+            }}
             className="text-white text-xl"
           >
             +
@@ -36,6 +53,13 @@ const Road = ({ roads, setSelectedRoad, metaData, setMetaData }) => {
       {metaData?.total > 1 && (
         <Paginate metaData={metaData} setMetaData={setMetaData} />
       )}
+      <AddRoad
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        refetch={refetch}
+        selectedIntersection={selectedIntersection}
+      />
+      isModalOpen, setIsModalOpen, selectedIntersection, refetch,
     </div>
   );
 };

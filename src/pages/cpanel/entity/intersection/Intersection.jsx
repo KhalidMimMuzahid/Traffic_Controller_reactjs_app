@@ -1,13 +1,19 @@
 /* eslint-disable react/prop-types */
 
+import { useState } from "react";
 import Paginate from "../../../../components/paginate/Paginate";
+import AddIntersection from "./addIntersection/AddIntersection";
+import { toast } from "react-toastify";
 
 const Intersection = ({
   intersections,
   setSelectedIntersection,
   metaData,
   setMetaData,
+  selectedZone,
+  refetch,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div>
       <div className="grid grid-cols-12 gap-4 items-center">
@@ -30,7 +36,13 @@ const Intersection = ({
         </div>
         <div className="col-span-1">
           <button
-            // onClick={() => setAddBrandModal(!addBrandModal)}
+            onClick={() => {
+              if (!selectedZone) {
+                toast.error("please select a zone first");
+              } else {
+                setIsModalOpen(true);
+              }
+            }}
             className="text-white text-xl"
           >
             +
@@ -41,6 +53,13 @@ const Intersection = ({
       {metaData?.total > 1 && (
         <Paginate metaData={metaData} setMetaData={setMetaData} />
       )}
+
+      <AddIntersection
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        refetch={refetch}
+        selectedZone={selectedZone}
+      />
     </div>
   );
 };

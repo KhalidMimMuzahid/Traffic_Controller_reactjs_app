@@ -9,19 +9,31 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { toast } from "react-toastify";
-import { useAddZoneMutation } from "../../../../../app/services/zoneApi/zoneApi";
+import { useAddIntersectionMutation } from "../../../../../app/services/intersectionApi/intersectionApi";
 
-const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
-  const [addZone, { data, isError, error, isLoading, isSuccess }] =
-    useAddZoneMutation();
+const AddIntersection = ({
+  isModalOpen,
+  setIsModalOpen,
+  selectedZone,
+  refetch,
+}) => {
+  const [addIntersection, { data, isError, error, isLoading, isSuccess }] =
+    useAddIntersectionMutation();
 
-  const [newZone, setNewZone] = useState({
+  const [newIntersection, setNewIntersection] = useState({
     name: "",
+    zone_id: selectedZone,
   });
 
-  const handleAddZone = () => {
-    console.log({ newZone });
-    addZone(newZone);
+  useEffect(() => {
+    setNewIntersection({
+      name: "",
+      zone_id: selectedZone,
+    });
+  }, [selectedZone]);
+
+  const handleAddIntersection = () => {
+    addIntersection(newIntersection);
   };
 
   useEffect(() => {
@@ -30,11 +42,12 @@ const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
         toast(data?.message);
         refetch();
         setIsModalOpen(false);
-        setNewZone({
+        setNewIntersection({
           name: "",
+          zone_id: selectedZone,
         });
       } else if (isError && error) {
-        //   toast.error(error?.data?.error?.message);
+        toast.error(error?.data?.error?.message);
       }
     }
   }, [
@@ -45,8 +58,9 @@ const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
     data?.is_success,
     data?.message,
     setIsModalOpen,
-    setNewZone,
+    setNewIntersection,
     refetch,
+    selectedZone,
   ]);
   return (
     <div>
@@ -60,8 +74,10 @@ const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
           <Input
             label="Name"
             required
-            value={newZone.name}
-            onChange={(e) => setNewZone({ ...newZone, name: e.target.value })}
+            value={newIntersection.name}
+            onChange={(e) =>
+              setNewIntersection({ ...newIntersection, name: e.target.value })
+            }
             className="w-full p-2 border mb-3"
           />
         </DialogBody>
@@ -70,8 +86,9 @@ const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
           <Button
             color="gray"
             onClick={() => {
-              setNewZone({
+              setNewIntersection({
                 name: "",
+                zone_id: selectedZone,
               });
               setIsModalOpen(false);
             }}
@@ -79,8 +96,12 @@ const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
           >
             Cancel
           </Button>
-          <Button color="blue" onClick={handleAddZone} className="w-[150px]">
-            {isLoading ? "Adding Zone..." : "Add Zone"}
+          <Button
+            color="blue"
+            onClick={handleAddIntersection}
+            className="w-[150px]"
+          >
+            {isLoading ? "Adding Intersection..." : "Add Intersection"}
           </Button>
         </DialogFooter>
       </Dialog>
@@ -88,4 +109,4 @@ const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
   );
 };
 
-export default AddZone;
+export default AddIntersection;

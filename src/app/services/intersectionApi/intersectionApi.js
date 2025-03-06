@@ -14,6 +14,13 @@ export const intersectionApi = createApi({
     },
   }),
   endpoints: (builder) => ({
+    addIntersection: builder.mutation({
+      query: (intersectionData) => ({
+        url: "/intersections/add-intersection",
+        method: "POST",
+        body: intersectionData,
+      }),
+    }),
     getIntersection: builder.query({
       query: ({ page, zoneId }) => ({
         url: `/intersections/get-intersections?page=${page}&limit=10${
@@ -27,4 +34,5 @@ export const intersectionApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetIntersectionQuery } = intersectionApi;
+export const { useAddIntersectionMutation, useGetIntersectionQuery } =
+  intersectionApi;
