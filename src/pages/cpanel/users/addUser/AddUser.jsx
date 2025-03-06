@@ -26,9 +26,6 @@ const AddUser = ({ isModalOpen, setIsModalOpen }) => {
   const handleAddUser = () => {
     console.log({ newUser });
     addUser(newUser);
-    // setUsers([...users, { id: users.length + 1, ...newUser }]);
-    // setIsModalOpen(false);
-    // setNewUser({ email: "", phone: "", password: "", role: "admin" });
   };
   useEffect(() => {
     if (!isLoading) {

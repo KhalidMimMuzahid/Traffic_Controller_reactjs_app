@@ -14,14 +14,3 @@ export default withMT({
   },
   plugins: [],
 });
-
-
-        // primary: "#153448", // Deep Blue Slate
-        // secondary: "#3C5B6F", // Steel Teal
-        // accent: "#948979", // Muted Sandstone
-        // neutral: "#DFD0B8", // Warm Beige
-
-        // primary: "#222831", // Deep Blue Slate
-        // secondary: "#31363F", // Steel Teal
-        // accent: "#76ABAE", // Muted Sandstone
-        // neutral: "#EEEEEE", // Warm Beige

@@ -7,23 +7,27 @@ import SignIn from "../pages/signIn/SignIn";
 import CPanel from "../pages/cpanel/CPanel";
 import Users from "../pages/cpanel/users/Users";
 import PrivetRoute from "./privateRoute/PrivateRoute";
+import Entity from "../pages/cpanel/entity/Entity";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: (
+      <PrivetRoute>
+        <Main />
+      </PrivetRoute>
+    ),
     errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/analytics", element: <Analytics /> },
       {
         path: "/cpanel",
-        element: (
-          <PrivetRoute>
-            <CPanel />
-          </PrivetRoute>
-        ),
-        children: [{ path: "/cpanel/users", element: <Users /> }],
+        element: <CPanel />,
+        children: [
+          { path: "/cpanel/users", element: <Users /> },
+          { path: "/cpanel/entity", element: <Entity /> },
+        ],
       },
     ],
   },

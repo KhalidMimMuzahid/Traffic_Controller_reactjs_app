@@ -127,15 +127,17 @@ const Sidebar = ({ open, setOpen }) => {
                     className=""
                   >
                     <List className="ml-6 border border-accent">
-                      <ListItem className="bg-tertiary text-primary hover:bg-neutral">
-                        <Link to="/cpanel/users">Users</Link>
-                      </ListItem>
-                      <ListItem className="bg-tertiary text-primary hover:bg-neutral">
-                        <Link to="/zones">Zones</Link>
-                      </ListItem>
-                      <ListItem className="bg-tertiary text-primary hover:bg-neutral">
-                        <Link to="/cameras">Cameras</Link>
-                      </ListItem>
+                      <Link to="/cpanel/users">
+                        <ListItem className="bg-tertiary text-primary hover:bg-neutral">
+                          Users
+                        </ListItem>
+                      </Link>
+
+                      <Link to="/cpanel/entity">
+                        <ListItem className="bg-tertiary text-primary hover:bg-neutral">
+                          Entity
+                        </ListItem>
+                      </Link>
                     </List>
                   </motion.div>
                 )}
