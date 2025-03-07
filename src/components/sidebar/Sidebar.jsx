@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-
 import {
   Drawer,
   Typography,
@@ -129,13 +128,32 @@ const Sidebar = ({ open, setOpen }) => {
                     <List className="ml-6 border border-accent">
                       <Link to="/cpanel/users">
                         <ListItem className="bg-tertiary text-primary hover:bg-neutral">
-                          Users
+                          Add Users
                         </ListItem>
                       </Link>
-
                       <Link to="/cpanel/entity">
                         <ListItem className="bg-tertiary text-primary hover:bg-neutral">
-                          Entity
+                          Add Entity
+                        </ListItem>
+                      </Link>
+                      <Link to="/cpanel/zones">
+                        <ListItem className="bg-tertiary text-primary hover:bg-neutral">
+                          Zones
+                        </ListItem>
+                      </Link>
+                      <Link to="/cpanel/intersections">
+                        <ListItem className="bg-tertiary text-primary hover:bg-neutral">
+                          Intersections
+                        </ListItem>
+                      </Link>
+                      <Link to="/cpanel/roads">
+                        <ListItem className="bg-tertiary text-primary hover:bg-neutral">
+                          Roads
+                        </ListItem>
+                      </Link>
+                      <Link to="/cpanel/cameras">
+                        <ListItem className="bg-tertiary text-primary hover:bg-neutral">
+                          Camera
                         </ListItem>
                       </Link>
                     </List>

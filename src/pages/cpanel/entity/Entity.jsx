@@ -18,7 +18,9 @@ const Entity = () => {
     isLoading: isLoadingForZone,
     isSuccess: isSuccessForZone,
     refetch: refetchForZone,
-  } = useGetZonesQuery(metaDataForZone?.current);
+  } = useGetZonesQuery({
+    page: metaDataForZone?.current,
+  });
   useEffect(() => {
     if (isSuccessForZone) {
       setMetaDataForZone(zoneData?.meta_data);

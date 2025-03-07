@@ -29,9 +29,16 @@ export const roadApi = createApi({
         method: "GET",
       }),
     }),
+    deleteRoad: builder.mutation({
+      query: ({ id }) => ({
+        url: `/roads/delete-road?id=${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useAddRoadMutation, useGetRoadsQuery } = roadApi;
+export const { useDeleteRoadMutation, useAddRoadMutation, useGetRoadsQuery } =
+  roadApi;

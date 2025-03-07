@@ -29,10 +29,19 @@ export const intersectionApi = createApi({
         method: "GET",
       }),
     }),
+    deleteIntersection: builder.mutation({
+      query: ({ id }) => ({
+        url: `/intersections/delete-intersection?id=${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useAddIntersectionMutation, useGetIntersectionQuery } =
-  intersectionApi;
+export const {
+  useDeleteIntersectionMutation,
+  useAddIntersectionMutation,
+  useGetIntersectionQuery,
+} = intersectionApi;

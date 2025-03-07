@@ -23,11 +23,18 @@ export const zoneApi = createApi({
     }),
 
     getZones: builder.query({
-      query: (page, name) => ({
+      query: ({ page, name }) => ({
         url: `/zones/get-zones?page=${page}&limit=10${
           name ? "&name=" + name : ""
         }`,
         method: "GET",
+      }),
+    }),
+
+    deleteZone: builder.mutation({
+      query: ({ id }) => ({
+        url: `/zones/delete-zone?id=${id}`,
+        method: "DELETE",
       }),
     }),
   }),
@@ -35,4 +42,5 @@ export const zoneApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useAddZoneMutation, useGetZonesQuery } = zoneApi;
+export const { useDeleteZoneMutation, useAddZoneMutation, useGetZonesQuery } =
+  zoneApi;

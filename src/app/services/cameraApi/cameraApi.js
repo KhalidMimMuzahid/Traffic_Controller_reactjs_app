@@ -29,9 +29,19 @@ export const cameraApi = createApi({
         method: "GET",
       }),
     }),
+    deleteCamera: builder.mutation({
+      query: ({ id }) => ({
+        url: `/cameras/delete-camera?id=${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useAddCameraMutation, useGetCamerasQuery } = cameraApi;
+export const {
+  useDeleteCameraMutation,
+  useAddCameraMutation,
+  useGetCamerasQuery,
+} = cameraApi;
