@@ -16,11 +16,15 @@ const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
     useAddZoneMutation();
 
   const [newZone, setNewZone] = useState({
-    name: "",
+    name: null,
   });
 
   const handleAddZone = () => {
-    console.log({ newZone });
+    if (!newZone?.name) {
+      // toast.error("please input zone name");
+      return;
+    }
+
     addZone(newZone);
   };
 
@@ -31,7 +35,7 @@ const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
         refetch();
         setIsModalOpen(false);
         setNewZone({
-          name: "",
+          name: null,
         });
       } else if (isError && error) {
         //   toast.error(error?.data?.error?.message);
@@ -71,7 +75,7 @@ const AddZone = ({ isModalOpen, setIsModalOpen, refetch }) => {
             color="gray"
             onClick={() => {
               setNewZone({
-                name: "",
+                name: null,
               });
               setIsModalOpen(false);
             }}

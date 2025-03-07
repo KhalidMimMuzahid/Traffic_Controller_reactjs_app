@@ -59,7 +59,6 @@ const Road = ({
         refetch={refetch}
         selectedIntersection={selectedIntersection}
       />
-      isModalOpen, setIsModalOpen, selectedIntersection, refetch,
     </div>
   );
 };

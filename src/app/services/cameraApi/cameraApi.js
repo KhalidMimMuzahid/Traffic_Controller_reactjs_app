@@ -14,6 +14,13 @@ export const cameraApi = createApi({
     },
   }),
   endpoints: (builder) => ({
+    addCamera: builder.mutation({
+      query: (cameraData) => ({
+        url: "/cameras/add-camera",
+        method: "POST",
+        body: cameraData,
+      }),
+    }),
     getCameras: builder.query({
       query: ({ page, roadId }) => ({
         url: `/cameras/get-cameras?page=${page}&limit=10${
@@ -27,4 +34,4 @@ export const cameraApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetCamerasQuery } = cameraApi;
+export const { useAddCameraMutation, useGetCamerasQuery } = cameraApi;

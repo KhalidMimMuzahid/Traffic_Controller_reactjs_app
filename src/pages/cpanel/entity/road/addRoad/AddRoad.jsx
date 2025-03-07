@@ -21,20 +21,24 @@ const AddRoad = ({
     useAddRoadMutation();
 
   const [newRoad, setNewRoad] = useState({
-    name: "",
+    name: null,
     road_no: null,
     intersection_id: selectedIntersection,
   });
 
   useEffect(() => {
     setNewRoad({
-      name: "",
+      name: null,
       road_no: null,
       intersection_id: selectedIntersection,
     });
   }, [selectedIntersection]);
 
   const handleAddRoad = () => {
+    if (!newRoad?.name || !newRoad?.road_no) {
+      // toast.error("please input zone name");
+      return;
+    }
     addRoad(newRoad);
   };
 
@@ -45,7 +49,7 @@ const AddRoad = ({
         refetch();
         setIsModalOpen(false);
         setNewRoad({
-          name: "",
+          name: null,
           road_no: null,
           intersection_id: selectedIntersection,
         });
@@ -98,7 +102,7 @@ const AddRoad = ({
             color="gray"
             onClick={() => {
               setNewRoad({
-                name: "",
+                name: null,
                 road_no: null,
                 intersection_id: selectedIntersection,
               });

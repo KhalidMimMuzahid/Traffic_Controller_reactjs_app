@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 
+import { useState } from "react";
 import Paginate from "../../../../components/paginate/Paginate";
-
-const Camera = ({ cameras, metaData, setMetaData }) => {
+import AddCamera from "./addCamera/AddCamera";
+import { toast } from "react-toastify";
+const Camera = ({ cameras, metaData, setMetaData, selectedRoad, refetch }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div>
       <div className="grid grid-cols-12 gap-4 items-center">
@@ -21,7 +24,13 @@ const Camera = ({ cameras, metaData, setMetaData }) => {
         </div>
         <div className="col-span-1">
           <button
-            // onClick={() => setAddBrandModal(!addBrandModal)}
+            onClick={() => {
+              if (!selectedRoad) {
+                toast.error("please select a road first");
+              } else {
+                setIsModalOpen(true);
+              }
+            }}
             className="text-white text-xl"
           >
             +
@@ -32,6 +41,12 @@ const Camera = ({ cameras, metaData, setMetaData }) => {
       {metaData?.total > 1 && (
         <Paginate metaData={metaData} setMetaData={setMetaData} />
       )}
+      <AddCamera
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        refetch={refetch}
+        selectedRoad={selectedRoad}
+      />
     </div>
   );
 };

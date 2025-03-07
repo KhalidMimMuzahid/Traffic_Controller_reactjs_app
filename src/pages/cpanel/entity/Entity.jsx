@@ -87,7 +87,7 @@ const Entity = () => {
     // isError,
     isLoading: isLoadingForCamera,
     isSuccess: isSuccessForCamera,
-    // refetch,
+    refetch: refetchForCamera,
   } = useGetCamerasQuery(
     { page: metaDataForCamera?.current, roadId: selectedRoad },
     {
@@ -139,6 +139,8 @@ const Entity = () => {
             cameras={cameraData?.data}
             metaData={metaDataForCamera}
             setMetaData={setMetaDataForCamera}
+            selectedRoad={selectedRoad}
+            refetch={refetchForCamera}
           />
           <hr className="border-gray-300 opacity-20" />
         </div>
