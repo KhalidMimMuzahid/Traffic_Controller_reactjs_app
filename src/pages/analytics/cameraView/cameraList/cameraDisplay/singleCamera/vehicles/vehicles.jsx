@@ -1,4 +1,7 @@
+import { useSelector } from "react-redux";
 import Vehicle from "./vehicle/vehicle";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const Vehicles = () => {
   const vehicles = [
@@ -109,6 +112,33 @@ const Vehicles = () => {
       licenseNumber: "Dhaka La- 5434",
     },
   ];
+
+  const socket = useSelector((state) => state.socket.socket);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.onmessage = (event) => {
+      const socketData = JSON.parse(event.data);
+
+      console.log(socketData?.data?.data);
+      toast.success(socketData?.data?.message);
+      // if (socketData.event === "emit001") {
+      //     console.log({socketData?.data})
+      // }
+    };
+
+    // return () => {
+    //   socket.off("newMessage");
+    // };
+  }, [socket]);
+
+  // socket.onmessage = (event) => {
+  //   const messageData = JSON.parse(event.data);
+  //   if (messageData.event === "emit001") {
+  //       setMessages(prevMessages => [...prevMessages, `📢 ${messageData.data}`]);
+  //   }
+
   return (
     <div className="col-span-2">
       <div className="grid grid-cols-2 gap-2">
