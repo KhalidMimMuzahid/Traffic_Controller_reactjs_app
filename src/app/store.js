@@ -7,6 +7,7 @@ import { zoneApi } from "./services/zoneApi/zoneApi";
 import { intersectionApi } from "./services/intersectionApi/intersectionApi";
 import { roadApi } from "./services/roadApi/roadApi";
 import { cameraApi } from "./services/cameraApi/cameraApi";
+import { vehicleApi } from "./services/vehicleApi/vehicleApi";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     [intersectionApi.reducerPath]: intersectionApi.reducer,
     [roadApi.reducerPath]: roadApi.reducer,
     [cameraApi.reducerPath]: cameraApi.reducer,
+    [vehicleApi.reducerPath]: vehicleApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -25,6 +27,7 @@ export const store = configureStore({
       zoneApi.middleware,
       intersectionApi.middleware,
       roadApi.middleware,
-      cameraApi.middleware
+      cameraApi.middleware,
+      vehicleApi.middleware
     ),
 });

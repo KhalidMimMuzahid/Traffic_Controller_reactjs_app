@@ -1,117 +1,63 @@
 import { useSelector } from "react-redux";
 import Vehicle from "./vehicle/vehicle";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+// import { toast } from "react-toastify";
+import { useGetVehiclesQuery } from "../../../../../../../app/services/vehicleApi/vehicleApi";
 
 const Vehicles = () => {
-  const vehicles = [
-    {
-      _id: "55555v56b4b545c",
-      category: "Car",
-      intersection: "Aamtoli",
-      roadNo: 1,
-      roadName: "Mirpur-1",
-      directionType: "entry", // "exit"
-      violationStatus: {
-        lenViolation: false,
-        speedViolation: false,
-      },
-      speed: 56,
-      // photo:
-      //   "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8Y2FyfGVufDB8fDB8fHww",
+  const [metaData, setMetaData] = useState({ current: 1 });
+  // const [search, setSearch] = useState("");
+  const {
+    data: vehicleData,
+    // error: getUserError,
+    // isError,
+    isLoading,
+    isSuccess,
+    refetch,
+  } = useGetVehiclesQuery({
+    page: metaData?.current,
+    // name: search,
+  });
+  useEffect(() => {
+    if (isSuccess) {
+      setMetaData(vehicleData?.meta_data);
+    }
+  }, [isSuccess, vehicleData?.meta_data, isLoading]);
 
-      photo: "https://i.postimg.cc/MG3vqK5V/temp-Image0-NBDw-Y.avif",
-
-      numberPlatePhoto:
-        "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
-      licenseNumber: "Dhaka La- 5434",
-    },
-    {
-      _id: "55555hfghty545c",
-      category: "Car",
-      intersection: "Aamtoli",
-      roadNo: 1,
-      roadName: "Mirpur-1",
-      directionType: "entry", // "exit"
-      violationStatus: {
-        lenViolation: true,
-        speedViolation: true,
-      },
-      speed: 56,
-      photo: "https://i.postimg.cc/JnytnVYg/temp-Image0pznzr.avif",
-      numberPlatePhoto:
-        "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
-      licenseNumber: "Dhaka La- 5434",
-    },
-    {
-      _id: "555fg45rr6b4b545c",
-      category: "Car",
-      intersection: "Aamtoli",
-      roadNo: 1,
-      roadName: "Mirpur-1",
-      directionType: "entry", // "exit"
-      violationStatus: {
-        lenViolation: true,
-        speedViolation: true,
-      },
-      speed: 56,
-      photo: "https://i.postimg.cc/CxNRr4fv/temp-Image3-SQmxs.avif",
-      numberPlatePhoto:
-        "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
-      licenseNumber: "Dhaka La- 5434",
-    },
-    {
-      _id: "55g45vrrb545c",
-      category: "Car",
-      intersection: "Aamtoli",
-      roadNo: 1,
-      roadName: "Mirpur-1",
-      directionType: "entry", // "exit"
-      violationStatus: {
-        lenViolation: true,
-        speedViolation: true,
-      },
-      speed: 56,
-      photo: "https://i.postimg.cc/Df94S0Tc/temp-Image7kg4-P1.avif",
-      numberPlatePhoto:
-        "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
-      licenseNumber: "Dhaka La- 5434",
-    },
-    {
-      _id: "55fgb6r564b545c",
-      category: "Car",
-      intersection: "Aamtoli",
-      roadNo: 1,
-      roadName: "Mirpur-1",
-      directionType: "entry", // "exit"
-      violationStatus: {
-        lenViolation: true,
-        speedViolation: true,
-      },
-      speed: 56,
-      photo: "https://i.postimg.cc/bN1DkPYf/temp-Image9-S5f-FS.avif",
-      numberPlatePhoto:
-        "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
-      licenseNumber: "Dhaka La- 5434",
-    },
-    {
-      _id: "55ffdv5dfb4b545c",
-      category: "Car",
-      intersection: "Aamtoli",
-      roadNo: 1,
-      roadName: "Mirpur-1",
-      directionType: "entry", // "exit"
-      violationStatus: {
-        lenViolation: true,
-        speedViolation: true,
-      },
-      speed: 56,
-      photo: "https://i.postimg.cc/hjHvQyHG/temp-Image-Nsrjlg.avif",
-      numberPlatePhoto:
-        "https://media.istockphoto.com/id/488650296/photo/minnesota-licence-plate-with-fake-number.jpg?s=2048x2048&w=is&k=20&c=VPhPaSjTJYP92rILsvzBrcRTd5ppPhYUxTdO6a-VEwQ=",
-      licenseNumber: "Dhaka La- 5434",
-    },
-  ];
+  // const vehicles = [
+  //   {
+  //     id: 1,
+  //     category: "string",
+  //     direction: "string23232",
+  //     len_violation: true,
+  //     speed_violation: true,
+  //     speed: 0,
+  //     tracker_id: 0,
+  //     license_number: "string2332",
+  //     photo:
+  //       "http://127.0.0.1:8000/api/v1/files/get?id=755bc8d2-40d3-4afd-b16e-7c7d93e9f4c9",
+  //     license_photo:
+  //       "http://127.0.0.1:8000/api/v1/files/get?id=7e918bca-377e-4711-8317-9789daec646c",
+  //     camera: {
+  //       id: 1,
+  //       name: "string",
+  //       direction_type: "exit",
+  //     },
+  //     road: {
+  //       id: 1,
+  //       name: "string",
+  //     },
+  //     intersection: {
+  //       id: 1,
+  //       name: "string",
+  //     },
+  //     zone: {
+  //       id: 1,
+  //       name: "string",
+  //     },
+  //     created_at: "2025-03-19T09:34:51.378822Z",
+  //   },
+  // ];
 
   const socket = useSelector((state) => state.socket.socket);
 
@@ -121,11 +67,12 @@ const Vehicles = () => {
     socket.onmessage = (event) => {
       const socketData = JSON.parse(event.data);
 
-      console.log(socketData?.data?.data);
-      toast.success(socketData?.data?.message);
-      // if (socketData.event === "emit001") {
-      //     console.log({socketData?.data})
-      // }
+      console.log(socketData);
+      if (socketData.event === "new-vehicle-added") {
+        refetch();
+        // console.log(socketData?.data?.data);
+        // toast.success(socketData?.data?.message);
+      }
     };
 
     // return () => {
@@ -133,17 +80,11 @@ const Vehicles = () => {
     // };
   }, [socket]);
 
-  // socket.onmessage = (event) => {
-  //   const messageData = JSON.parse(event.data);
-  //   if (messageData.event === "emit001") {
-  //       setMessages(prevMessages => [...prevMessages, `📢 ${messageData.data}`]);
-  //   }
-
   return (
     <div className="col-span-2">
       <div className="grid grid-cols-2 gap-2">
-        {vehicles?.map((vehicle) => (
-          <Vehicle key={vehicle?._id} vehicle={vehicle} />
+        {vehicleData?.data?.map((vehicle) => (
+          <Vehicle key={vehicle?.id} vehicle={vehicle} />
         ))}
       </div>
     </div>
