@@ -2,8 +2,14 @@ const Camera = () => {
   return (
     <div className="col-span-3 ">
       {/* Center Column - Live Video Feed */}
-      <div className="col-span-2 flex items-center justify-center bg-gray-200 h-96 rounded">
-        <video autoPlay loop muted playsInline className=" object-cover">
+      <div
+        className="col-span-2 flex items-center justify-center bg-black h-96"
+        style={{
+          border: "16px solid black",
+          borderRadius: "0.5rem", // Equivalent to Tailwind's `rounded-lg`
+        }}
+      >
+        <video autoPlay loop muted playsInline className="w-full max-h-full">
           <source
             src="/src/app/asssets/videos/live_camera_view.mp4"
             type="video/mp4"
