@@ -47,15 +47,18 @@ const Vehicle = ({ vehicle }) => {
         className="w-full h-40 object-cover"
       />
       <div className="px-3 py-1">
-        <h2 className="text-lg font-bold text-primary">{vehicle.category}</h2>
-        <p className="text-sm text-neutral-400">
+        {/* <p className="text-sm text-neutral-400">
           <span className="font-semibold">Intersection:</span>{" "}
           {vehicle.intersection?.name}
+        </p> */}
+        <p className="text-sm text-neutral-400">
+          {vehicle.zone?.name}&gt;&gt; {vehicle.intersection?.name}&gt;&gt;{" "}
+          {vehicle.road?.name}&gt;&gt; {vehicle.camera?.name}
         </p>
+        <h1 className="text-sm font-bold text-neutral">{vehicle.category}</h1>
         <p className="text-sm text-neutral-400">
           <span className="font-semibold">Road:</span> {vehicle?.road?.name}
         </p>
-
         <div className="flex gap-2">
           <p
             className={`mt-2 px-3 py-1 inline-block rounded-lg text-xs font-semibold ${
@@ -75,7 +78,6 @@ const Vehicle = ({ vehicle }) => {
             </p>
           )}
         </div>
-
         <p className="mt-2 text-accent font-semibold text-sm">
           Speed: {vehicle.speed} km/h
         </p>

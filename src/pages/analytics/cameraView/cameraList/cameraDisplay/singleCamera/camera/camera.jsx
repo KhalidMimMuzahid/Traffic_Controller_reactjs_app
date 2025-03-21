@@ -9,13 +9,20 @@ const Camera = () => {
           borderRadius: "0.5rem", // Equivalent to Tailwind's `rounded-lg`
         }}
       >
-        <video autoPlay loop muted playsInline className="w-full max-h-full">
+        <img
+          src={`http://127.0.0.1:8000/api/v1/files/get-video-stream?camera_id=1`}
+          alt="Live CCTV Stream"
+          // className="border-4 border-accent rounded-lg shadow-lg"
+          className="w-full max-h-full text-white text-center"
+        />
+
+        {/* <video autoPlay loop muted playsInline className="w-full max-h-full">
           <source
             src="/src/app/asssets/videos/live_camera_view.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
-        </video>
+        </video> */}
       </div>
       {/* Bottom Section - Entry and Exit Table */}
       <div className="mt-4 bg-white rounded shadow p-4">
