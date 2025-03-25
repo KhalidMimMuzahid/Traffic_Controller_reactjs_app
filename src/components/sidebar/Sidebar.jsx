@@ -69,7 +69,7 @@ const Sidebar = ({ open, setOpen }) => {
             <ListItem className="bg-accent hover:bg-neutral text-primary">
               <Link
                 to="/zones"
-                className="hover:text-secondary transition-colors"
+                className="hover:text-secondary transition-colors  w-full"
               >
                 Zones
               </Link>
@@ -77,7 +77,7 @@ const Sidebar = ({ open, setOpen }) => {
             <ListItem className="bg-accent hover:bg-neutral text-primary">
               <Link
                 to="/analytics"
-                className="hover:text-secondary transition-colors"
+                className="hover:text-secondary transition-colors w-full"
               >
                 Analytics
               </Link>

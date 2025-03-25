@@ -41,7 +41,7 @@ const Vehicle = ({ vehicle }) => {
   const [showLicensePopup, setShowLicensePopup] = useState(false);
   return (
     <div className="relative bg-primary text-white rounded-xl shadow-lg overflow-hidden">
-      <div className="flex justify-center">
+      <div className="flex justify-center h-[150px] p-2">
         <img
           src={vehicle.photo}
           alt="Vehicle"
@@ -55,13 +55,15 @@ const Vehicle = ({ vehicle }) => {
           {vehicle.intersection?.name}
         </p> */}
         <p className="text-sm text-neutral-400">
-          {vehicle.zone?.name}&gt;&gt; {vehicle.intersection?.name}&gt;&gt;{" "}
-          {vehicle.road?.name}&gt;&gt; {vehicle.camera?.name}
+          Zone: {vehicle.zone?.name} <br />
+          Intersection: {vehicle.intersection?.name} <br />
+          Road: {vehicle.road?.name} <br />
+          Camera: {vehicle.camera?.name}
         </p>
-        <h1 className="text-sm font-bold text-neutral">{vehicle.category}</h1>
-        <p className="text-sm text-neutral-400">
-          <span className="font-semibold">Road:</span> {vehicle?.road?.name}
-        </p>
+        <h1 className="text-sm font-bold text-neutral">
+          Type: {vehicle.category}
+        </h1>
+
         <div className="flex gap-2">
           {/* <p
             className={`mt-2 px-3 py-1 inline-block rounded-lg text-xs font-semibold ${
@@ -74,7 +76,9 @@ const Vehicle = ({ vehicle }) => {
           </p> */}
           <p
             className={`mt-2 px-3 py-1 inline-block rounded-lg text-xs font-semibold ${
-              vehicle?.direction === "entry" ? "bg-green-600" : "bg-red-600"
+              vehicle?.direction?.toLowerCase() === "entry"
+                ? "bg-green-600"
+                : "bg-red-600"
             }`}
           >
             {vehicle?.direction.toUpperCase()}
