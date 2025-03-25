@@ -41,11 +41,14 @@ const Vehicle = ({ vehicle }) => {
   const [showLicensePopup, setShowLicensePopup] = useState(false);
   return (
     <div className="relative bg-primary text-white rounded-xl shadow-lg overflow-hidden">
-      <img
-        src={vehicle.photo}
-        alt="Vehicle"
-        className="w-full h-40 object-cover"
-      />
+      <div className="flex justify-center">
+        <img
+          src={vehicle.photo}
+          alt="Vehicle"
+          className="max-w-full max-h-40 w-auto  object-cover "
+        />
+      </div>
+
       <div className="px-3 py-1">
         {/* <p className="text-sm text-neutral-400">
           <span className="font-semibold">Intersection:</span>{" "}
@@ -60,7 +63,7 @@ const Vehicle = ({ vehicle }) => {
           <span className="font-semibold">Road:</span> {vehicle?.road?.name}
         </p>
         <div className="flex gap-2">
-          <p
+          {/* <p
             className={`mt-2 px-3 py-1 inline-block rounded-lg text-xs font-semibold ${
               vehicle?.camera?.direction_type === "entry"
                 ? "bg-green-600"
@@ -68,6 +71,13 @@ const Vehicle = ({ vehicle }) => {
             }`}
           >
             {vehicle?.camera?.direction_type.toUpperCase()}
+          </p> */}
+          <p
+            className={`mt-2 px-3 py-1 inline-block rounded-lg text-xs font-semibold ${
+              vehicle?.direction === "entry" ? "bg-green-600" : "bg-red-600"
+            }`}
+          >
+            {vehicle?.direction.toUpperCase()}
           </p>
 
           {vehicle.speed_violation && vehicle.len_violation && (
