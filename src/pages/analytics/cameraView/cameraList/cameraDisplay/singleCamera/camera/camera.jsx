@@ -1,4 +1,29 @@
-const Camera = () => {
+import { useEffect } from "react";
+import { useGetVehiclesCountAnalysisQuery } from "../../../../../../../app/services/vehicleApi/vehicleApi";
+
+// eslint-disable-next-line react/prop-types
+const Camera = ({ refreshAnalyzingData }) => {
+  // const [search, setSearch] = useState("");
+  const {
+    data: vehicleAnalysisData,
+    // error: getUserError,
+    // isError,
+    // isLoading,
+    // isSuccess,
+    refetch,
+  } = useGetVehiclesCountAnalysisQuery({
+    camera_id: 1,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refreshAnalyzingData, refetch]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setMetaData(vehicleData?.meta_data);
+  //   }
+  // }, [isSuccess, vehicleData?.meta_data, isLoading]);
+
   return (
     <div className="col-span-3 ">
       {/* Center Column - Live Video Feed */}
@@ -36,23 +61,23 @@ const Camera = () => {
             </tr>
           </thead>
           <tbody>
-            {["Car", "Bicycle", "MotorBike", "Bus", "Truck"].map(
-              (type, idx) => (
-                <tr key={idx}>
-                  <td className="border px-4 py-2">{type}</td>
-                  <td className="border px-4 py-2">
-                    {Math.floor(Math.random() * 10)}
-                  </td>
-                  <td className="border px-4 py-2">
-                    {Math.floor(Math.random() * 10)}
-                  </td>
-                </tr>
-              )
-            )}
+            {vehicleAnalysisData?.data?.data?.map((each, idx) => (
+              <tr key={idx}>
+                <td className="border px-4 py-2">{each?.category}</td>
+                <td className="border px-4 py-2">{each?.totalEntry}</td>
+                <td className="border px-4 py-2">{each?.totalExit}</td>
+              </tr>
+            ))}
             <tr className="font-bold bg-gray-100">
               <td className="border px-4 py-2">Total</td>
-              <td className="border px-4 py-2">7</td>
-              <td className="border px-4 py-2">11</td>
+
+              <td className="border px-4 py-2">
+                {vehicleAnalysisData?.data?.totalEntry || 0}
+              </td>
+
+              <td className="border px-4 py-2">
+                {vehicleAnalysisData?.data?.totalExit || 0}
+              </td>
             </tr>
           </tbody>
         </table>

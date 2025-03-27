@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 // import { toast } from "react-toastify";
 import { useGetVehiclesQuery } from "../../../../../../../app/services/vehicleApi/vehicleApi";
 
-const Vehicles = () => {
+// eslint-disable-next-line react/prop-types
+const Vehicles = ({ setRefreshAnalyzingData }) => {
   const [metaData, setMetaData] = useState({ current: 1 });
   // const [search, setSearch] = useState("");
   const {
@@ -70,6 +71,7 @@ const Vehicles = () => {
       console.log(socketData);
       if (socketData.event === "new-vehicle-added") {
         refetch();
+        setRefreshAnalyzingData((prev) => !prev);
         // console.log(socketData?.data?.data);
         // toast.success(socketData?.data?.message);
       }
@@ -78,7 +80,7 @@ const Vehicles = () => {
     // return () => {
     //   socket.off("newMessage");
     // };
-  }, [socket]);
+  }, [socket, refetch]);
 
   return (
     <div className="col-span-2">

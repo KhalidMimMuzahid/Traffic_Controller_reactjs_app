@@ -21,8 +21,19 @@ export const vehicleApi = createApi({
         method: "GET",
       }),
     }),
+
+    getVehiclesCountAnalysis: builder.query({
+      query: ({ camera_id }) => ({
+        url: `/vehicles/get-vehicles-count-analysis?camera_id=${camera_id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
 // auto-generated based on the defined endpoints
-export const { useGetVehiclesQuery } = vehicleApi;
+export const { useGetVehiclesQuery, useGetVehiclesCountAnalysisQuery } =
+  vehicleApi;
+
+
+
