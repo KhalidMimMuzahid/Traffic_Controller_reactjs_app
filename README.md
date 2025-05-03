@@ -2,7 +2,7 @@
 
 ### Download the template first
 
-### install all dependency using "yarn" or "npm i"
+### install all dependency using "yarn" or  "npm i"
 
 ### run project using "yarn dev" or "npm run dev"
 
